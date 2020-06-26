@@ -58,37 +58,40 @@ const Register = () => {
 
 	const regitserForm = () => (
 		<form className="w-full max-w-sm" onSubmit={handleSubmit}>
-			<h1 className="mt-4 text-2xl">Register</h1>
+			<h1 className="mt-4 mb-4 text-xl">Register</h1>
 			{success && showSuccessMessage(success)}
 			{error && showErrorMessage(error)}
-			<div className="md:w-3/3 mt-2">
+			<div className="w-full mt-2">
 				<input
 					value={name}
 					onChange={handleChange('name')}
 					type="text"
 					className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
 					placeholder="Type your name"
+					required
 				/>
 			</div>
-			<div className="md:w-3/3 mt-4">
+			<div className="w-full mt-4">
 				<input
 					value={email}
 					onChange={handleChange('email')}
 					type="email"
 					className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
 					placeholder="Type your email"
+					required
 				/>
 			</div>
-			<div className="md:w-3/3 mt-4">
+			<div className="w-full mt-4">
 				<input
 					value={password}
 					onChange={handleChange('password')}
 					type="password"
 					className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
 					placeholder="Type your password"
+					required
 				/>
 			</div>
-			<div className="md:w-3/3 mt-4 items-start">
+			<div className="w-full mt-4 items-start">
 				<button className="shadow bg-teal-500 hover:bg-teal-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded">
 					{buttonText}
 				</button>
