@@ -3,3 +3,27 @@
 @tailwind components;
 
 @tailwind utilities;
+
+body {
+	background: linear-gradient(
+		160deg,
+		rgba(119, 151, 232, 1) 0%,
+		rgba(184, 168, 224, 1) 100%
+	);
+	width: 100vw;
+	height: 100vh;
+	overflow: hidden;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-size: cover;
+	background-repeat: repeat;
+}
+
+.large-border-radius {
+	border-radius: 4rem;
+}
+
+.medium-border-radius {
+	border-radius: 2rem;
+}

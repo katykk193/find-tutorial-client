@@ -1,25 +1,25 @@
 import { useState, useEffect } from 'react';
-import Router from 'next/router';
 import axios from 'axios';
+import Link from 'next/link';
+import Router from 'next/router';
 import { showSuccessMessage, showErrorMessage } from '../helpers/alerts';
 import { API } from '../config';
-import { isAuth } from '../helpers/auth';
+import { authenticate, isAuth } from '../helpers/auth';
 
-const Register = () => {
+const Login = () => {
 	const [state, setState] = useState({
-		name: '',
 		email: '',
 		password: '',
 		error: '',
 		success: '',
-		buttonText: 'Register'
+		buttonText: 'Login'
 	});
-
-	const { name, email, password, error, success, buttonText } = state;
 
 	useEffect(() => {
 		isAuth() && Router.push('/');
 	}, []);
+
+	const { email, password, error, success, buttonText } = state;
 
 	const handleChange = (name) => (e) => {
 		setState({
@@ -27,56 +27,38 @@ const Register = () => {
 			[name]: e.target.value,
 			error: '',
 			success: '',
-			buttonText: 'Register'
+			buttonText: 'Login'
 		});
 	};
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		setState({ ...state, buttonText: 'Registering' });
+		setState({ ...state, buttonText: 'Logging in' });
 
 		try {
-			const response = await axios.post(`${API}/register`, {
-				name,
+			const response = await axios.post(`${API}/login`, {
 				email,
 				password
 			});
 
-			setState({
-				...state,
-				name: '',
-				email: '',
-				password: '',
-				buttonText: 'Submitted',
-				success: response.data.message
-			});
+			authenticate(response, () => Router.push('/'));
 		} catch (err) {
 			setState({
 				...state,
-				buttonText: 'Register',
+				buttonText: 'Login',
 				error: err.response.data.error
 			});
 		}
 	};
 
-	const regitserForm = () => (
+	const loginForm = () => (
 		<form className="w-full max-w-sm" onSubmit={handleSubmit}>
-			<h1 className="mt-4 mb-5 sm:mb-20 text-2xl sm:text-5xl text-purple-400 font-bold">
-				Register
+			<h1 className="mt-4 mb-5 sm:mb-20 text-2xl md:text-5xl text-purple-400 font-bold">
+				Login
 			</h1>
 			{success && showSuccessMessage(success)}
 			{error && showErrorMessage(error)}
-			<div className="w-full mt-2">
-				<input
-					value={name}
-					onChange={handleChange('name')}
-					type="text"
-					className="shadow-xl appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-					placeholder="Type your name"
-					required
-				/>
-			</div>
 			<div className="w-full mt-4">
 				<input
 					value={email}
@@ -104,7 +86,12 @@ const Register = () => {
 			</div>
 		</form>
 	);
-	return <>{regitserForm()}</>;
+	return (
+		<>
+			{JSON.stringify(isAuth())}
+			{loginForm()}
+		</>
+	);
 };
 
-export default Register;
+export default Login;
