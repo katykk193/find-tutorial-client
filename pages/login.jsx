@@ -42,7 +42,11 @@ const Login = () => {
 				password
 			});
 
-			authenticate(response, () => Router.push('/'));
+			authenticate(response, () =>
+				isAuth() && isAuth().role === 'admin'
+					? Router.push('/admin')
+					: Router.push('/user')	
+			);
 		} catch (err) {
 			setState({
 				...state,

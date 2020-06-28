@@ -1,4 +1,5 @@
 import cookie from 'js-cookie';
+import Router from 'next/router';
 
 export const setCookie = (key, value) => {
 	if (process.browser) {
@@ -35,17 +36,23 @@ export const removeLocalStorage = (key) => {
 export const authenticate = (response, next) => {
 	setCookie('token', response.data.token);
 	setLocalStorage('user', response.data.user);
-	next()
+	next();
 };
 
 export const isAuth = () => {
-	if(process.browser){
-		const cookieChecked = getCookie('token')
-		if(cookieChecked){
-			if(localStorage.getItem('user')) {
-				return JSON.parse(localStorage.getItem('user'))
+	if (process.browser) {
+		const cookieChecked = getCookie('token');
+		if (cookieChecked) {
+			if (localStorage.getItem('user')) {
+				return JSON.parse(localStorage.getItem('user'));
 			}
 			return false;
 		}
 	}
-}
+};
+
+export const logout = () => {
+	removeCookie('token');
+	removeLocalStorage('user');
+	Router.push('/login');
+};
