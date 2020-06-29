@@ -15,10 +15,37 @@ export const removeCookie = (key) => {
 	}
 };
 
-export const getCookie = (key) => {
+export const getCookie = (key, req) => {
 	if (process.browser) {
 		return cookie.get(key);
 	}
+
+	return process.browser
+		? getCookieFromBrowser(key)
+		: getCookieFromServer(key, req);
+};
+
+export const getCookieFromBrowser = (key) => {
+	return cookie.get(key);
+};
+
+export const getCookieFromServer = (key, req) => {
+	if (!req.headers.cookie) {
+		return undefined;
+	}
+
+	console.log('header cookie', req.headers.cookie);
+	console.log('key', key);
+
+	let token = req.headers.cookie
+		.split(';')
+		.find((c) => c.trim().startsWith(`${key}=`));
+	if (!token) {
+		return undefined;
+	}
+	let tokenValue = token.split('=')[1];
+	console.log('fromserver', tokenValue);
+	return tokenValue;
 };
 
 export const setLocalStorage = (key, value) => {

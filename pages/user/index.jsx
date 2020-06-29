@@ -1,3 +1,5 @@
-const User = () => <h1>User Page</h1>
+import withUser from '../withUser';
 
-export default User;
+const User = ({ user, token }) => <h1>{JSON.stringify(user)}</h1>;
+
+export default withUser(User);

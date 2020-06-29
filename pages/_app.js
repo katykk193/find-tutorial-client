@@ -19,7 +19,7 @@ export default function App({ Component, pageProps }) {
 				<link rel="stylesheet" type="text/css" href="/styles.css" />
 			</Head>
 
-			<div className="m-10 max-w-5xl overflow-hidden shadow-xl grid sm:grid-cols-2 gap-5 sm:gap-12 bg-white p-8 sm:p-12 large-border-radius">
+			<div className="mx-64 my-16 overflow-hidden fixed inset-0 shadow-xl grid sm:grid-cols-2 gap-5 sm:gap-12 bg-white p-8 sm:p-12 large-border-radius">
 				<div className="h-48 medium-border-radius w-full sm:h-full overflow-hidden bg-image shadow-xl">
 					<img
 						className="sm:h-full sm:w-full"
@@ -27,8 +27,8 @@ export default function App({ Component, pageProps }) {
 						alt="bg-image"
 					/>
 				</div>
-				<div className="rounded-lg overfloew-hidden">
-					<nav className="flex items-center sm:text-lg mb-5 sm:mb-20">
+				<div className="rounded-lg overflow-scroll">
+					<nav className="flex items-center fixed sm:text-lg mb-5 sm:mb-20">
 						<Link href="/">
 							<a className="block lg:inline-block lg:mt-0 text-gray-500 hover:text-purple-600 hover:font-bold mr-8">
 								Home
