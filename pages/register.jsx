@@ -72,7 +72,7 @@ const Register = () => {
 					value={name}
 					onChange={handleChange('name')}
 					type="text"
-					className="shadow-xl appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+					className="shadow-xl appearance-none border rounded w-full py-2 px-3 text-gray-700"
 					placeholder="Type your name"
 					required
 				/>
@@ -82,7 +82,7 @@ const Register = () => {
 					value={email}
 					onChange={handleChange('email')}
 					type="email"
-					className="shadow-xl appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+					className="shadow-xl appearance-none border rounded w-full py-2 px-3 text-gray-700"
 					placeholder="Type your email"
 					required
 				/>
@@ -92,13 +92,13 @@ const Register = () => {
 					value={password}
 					onChange={handleChange('password')}
 					type="password"
-					className="shadow-xl appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+					className="shadow-xl appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3"
 					placeholder="Type your password"
 					required
 				/>
 			</div>
 			<div className="w-full mt-8 items-start">
-				<button className="shadow-xl bg-purple-400 hover:bg-purple-300 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded">
+				<button className="shadow-xl bg-purple-400 hover:bg-purple-300 text-white font-bold py-2 px-4 rounded">
 					{buttonText}
 				</button>
 			</div>

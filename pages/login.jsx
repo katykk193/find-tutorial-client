@@ -45,7 +45,7 @@ const Login = () => {
 			authenticate(response, () =>
 				isAuth() && isAuth().role === 'admin'
 					? Router.push('/admin')
-					: Router.push('/user')	
+					: Router.push('/user')
 			);
 		} catch (err) {
 			setState({
@@ -68,7 +68,7 @@ const Login = () => {
 					value={email}
 					onChange={handleChange('email')}
 					type="email"
-					className="shadow-xl appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+					className="shadow-xl appearance-none border rounded w-full py-2 px-3 text-gray-700"
 					placeholder="Type your email"
 					required
 				/>
@@ -78,13 +78,13 @@ const Login = () => {
 					value={password}
 					onChange={handleChange('password')}
 					type="password"
-					className="shadow-xl appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+					className="shadow-xl appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3"
 					placeholder="Type your password"
 					required
 				/>
 			</div>
 			<div className="w-full mt-8 items-start">
-				<button className="shadow-xl bg-purple-400 hover:bg-purple-300 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded">
+				<button className="shadow-xl bg-purple-400 hover:bg-purple-300 text-white font-bold py-2 px-4 rounded">
 					{buttonText}
 				</button>
 			</div>
@@ -94,6 +94,9 @@ const Login = () => {
 		<>
 			{JSON.stringify(isAuth())}
 			{loginForm()}
+			<Link href="/auth/password/forgot">
+				<a className="float-right text-red-600 border-b border-transparent hover:border-red-600">Forgot Password</a>
+			</Link>
 		</>
 	);
 };

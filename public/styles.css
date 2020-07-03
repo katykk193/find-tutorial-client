@@ -27,3 +27,7 @@ body {
 .medium-border-radius {
 	border-radius: 2rem;
 }
+
+*:focus {
+	outline: none !important;
+}
