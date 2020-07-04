@@ -1,32 +1,53 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { showSuccessMessage, showErrorMessage } from '../../../helpers/alerts';
-import { API } from '../../../config';
+import {
+	showSuccessMessage,
+	showErrorMessage
+} from '../../../../helpers/alerts';
+import { API } from '../../../../config';
+import jwt from 'jsonwebtoken';
+import Router, { withRouter } from 'next/router';
 
-const ForgotPassword = () => {
+const ResetPassword = ({ router }) => {
 	const [state, setState] = useState({
-		email: '',
-		buttonText: 'Forgot Password',
+		name: '',
+		token: '',
+		newPassword: '',
+		buttonText: 'Reset Password',
 		success: '',
 		error: ''
 	});
 
-	const { email, buttonText, success, error } = state;
+	const { name, token, newPassword, buttonText, success, error } = state;
+
+	useEffect(() => {
+		const decoded = jwt.decode(router.query.id);
+		if (decoded) {
+			setState({ ...state, name: decoded.name, token: router.query.id });
+		}
+	}, [router]);
 
 	const handleChange = (e) => {
-		setState({ ...state, email: e.target.value, success: '', error: '' });
+		setState({
+			...state,
+			newPassword: e.target.value,
+			success: '',
+			error: ''
+		});
 	};
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		setState({ ...state, buttonText: 'Sending' });
 		try {
-			const response = await axios.put(`${API}/forgot-password`, {
-				email
+			const response = await axios.put(`${API}/reset-password`, {
+				resetPasswordLink: token,
+				newPassword
 			});
+
 			setState({
 				...state,
-				email: '',
+				newPassword: '',
 				buttonText: 'Done',
 				success: response.data.message
 			});
@@ -39,20 +60,20 @@ const ForgotPassword = () => {
 		}
 	};
 
-	const passwordForgotForm = () => (
+	const passwordResetForm = () => (
 		<form onSubmit={handleSubmit} className="w-full max-w-sm">
 			<h1 className="mt-4 mb-5 sm:mb-20 text-2xl md:text-5xl text-purple-400 font-bold">
-				Forgot Password
+				Hi {name}, ready to reset password?
 			</h1>
 			{success && showSuccessMessage(success)}
 			{error && showErrorMessage(error)}
 			<div className="w-full mt-4">
 				<input
-					value={email}
+					value={newPassword}
 					onChange={handleChange}
-					type="email"
+					type="password"
 					className="shadow-xl appearance-none border rounded w-full py-2 px-3 text-gray-700"
-					placeholder="Type your email"
+					placeholder="Type new password"
 					required
 				/>
 			</div>
@@ -64,7 +85,7 @@ const ForgotPassword = () => {
 		</form>
 	);
 
-	return <>{passwordForgotForm()}</>;
+	return <>{passwordResetForm()}</>;
 };
 
-export default ForgotPassword;
+export default withRouter(ResetPassword);
