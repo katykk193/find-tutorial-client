@@ -28,7 +28,7 @@ export default function App({ Component, pageProps }) {
 					/>
 				</div>
 				<div className="rounded-lg overflow-scroll">
-					<nav className="flex items-center fixed sm:text-lg mb-20 sm:mb-20">
+					<nav className="flex items-center sm:text-lg mb-20 sm:mb-20">
 						<Link href="/">
 							<a className="block lg:inline-block lg:mt-0 text-gray-500 hover:text-purple-600 hover:font-bold mr-8">
 								Home
