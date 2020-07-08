@@ -20,13 +20,13 @@ export default function App({ Component, pageProps }) {
 			</Head>
 
 			<div className="mx-64 my-16 overflow-hidden fixed inset-0 shadow-xl grid sm:grid-cols-2 gap-5 sm:gap-12 bg-white p-8 sm:p-12 large-border-radius">
-				<div className="h-48 medium-border-radius w-full sm:h-full overflow-hidden bg-image shadow-xl">
+				{/* <div className="h-48 medium-border-radius w-full sm:h-full overflow-hidden bg-image shadow-xl">
 					<img
 						className="sm:h-full sm:w-full"
 						src="/images/1.jpeg"
 						alt="bg-image"
 					/>
-				</div>
+				</div> */}
 				<div className="rounded-lg overflow-scroll">
 					<nav className="flex items-center sm:text-lg mb-20 sm:mb-20">
 						<Link href="/">
