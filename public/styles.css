@@ -31,3 +31,20 @@ body {
 *:focus {
 	outline: none !important;
 }
+
+.bg-primary {
+	background: linear-gradient(
+		160deg,
+		rgba(119, 151, 232, 1) 0%,
+		rgba(184, 168, 224, 1) 100%
+	);
+}
+
+.btn-primary {
+	background: linear-gradient(to right, #25aae1, #40e495, #30dd8a, #2bb673);
+	color: #fff;
+}
+
+.btn-primary:hover {
+	background-size: 400% 100%;
+}

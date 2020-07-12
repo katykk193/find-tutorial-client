@@ -20,7 +20,7 @@ export default function App({ Component, pageProps }) {
 				<link rel="stylesheet" type="text/css" href="/styles.css" />
 			</Head>
 
-			<div className="mx-64 my-16 overflow-hidden fixed inset-0 shadow-xl bg-white p-8 sm:p-12 large-border-radius">
+			<div className="mx-64 overflow-scroll my-16 fixed inset-0 shadow-xl bg-white p-8 sm:p-12 large-border-radius">
 				{/* <div className="h-48 medium-border-radius w-full sm:h-full overflow-hidden bg-image shadow-xl">
 					<img
 						className="sm:h-full sm:w-full"
@@ -33,6 +33,11 @@ export default function App({ Component, pageProps }) {
 						<Link href="/">
 							<a className="block lg:inline-block lg:mt-0 text-gray-500 hover:text-purple-600 hover:font-bold mr-8">
 								Home
+							</a>
+						</Link>
+						<Link href="/user/links/create">
+							<a className="block lg:inline-block lg:mt-0 text-gray-500 hover:text-purple-600 hover:font-bold mr-8">
+								Submit a link
 							</a>
 						</Link>
 						{!isAuth() && (
