@@ -4,9 +4,9 @@ import { API } from '../config';
 
 const Home = ({ categories }) => {
 	const listCategories = () => {
-		return categories.map(({ slug, image, name }, index) => {
+		return categories.map(({ _id, slug, image, name }, index) => {
 			return (
-				<Link href={`/links/${slug}`} key={index}>
+				<Link href={`/links/${slug}`} key={_id}>
 					<a>
 						<div>
 							<img src={image && image.url} alt={name} />

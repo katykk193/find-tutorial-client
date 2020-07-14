@@ -9,6 +9,11 @@ const Admin = ({ user }) => (
 				<a>Create category</a>
 			</Link>
 		</div>
+		<div>
+			<Link href="/admin/category/read">
+				<a>All categories</a>
+			</Link>
+		</div>
 	</>
 );
 

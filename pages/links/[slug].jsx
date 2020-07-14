@@ -82,19 +82,19 @@ const Links = ({
 		setSkip(toSkip);
 	};
 
-	const loadMoreButton = () => {
-		return (
-			size > 0 &&
-			size >= limit && (
-				<button
-					onClick={loadMore}
-					className="transitin ease-in btn-primary px-4 py-3 rounded"
-				>
-					Load more
-				</button>
-			)
-		);
-	};
+	// const loadMoreButton = () => {
+	// 	return (
+	// 		size > 0 &&
+	// 		size >= limit && (
+	// 			<button
+	// 				onClick={loadMore}
+	// 				className="transitin ease-in btn-primary px-4 py-3 rounded"
+	// 			>
+	// 				Load more
+	// 			</button>
+	// 		)
+	// 	);
+	// };
 
 	return (
 		<>
@@ -107,14 +107,20 @@ const Links = ({
 					<img src={category.image.url} alt={category.name} />
 				</div>
 			</div>
-			<div>
+			{/* <div className="pt-4 pb-5">{loadMoreButton()}</div> */}
+
+			<InfiniteScroll
+				pageStart={0}
+				loadMore={loadMore}
+				hasMore={size > 0 && size >= limit}
+				loader={<img key={0} src="/images/loader.gif" alt="loading" />}
+			>
 				<div>{listOfLinks()}</div>
 				<div>
 					<h2>Most popular in {category.name}</h2>
 					<p>show popular links</p>
 				</div>
-			</div>
-			<div className="pt-4 pb-5">{loadMoreButton()}</div>
+			</InfiniteScroll>
 		</>
 	);
 };
