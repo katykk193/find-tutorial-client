@@ -23,8 +23,24 @@ const Read = ({ user, token }) => {
 		setState({ ...state, categories: response.data });
 	};
 
-	const confirmDelete = (slug) => {
-		console.log(slug);
+	const confirmDelete = (e, slug) => {
+		e.preventDefault();
+
+		let answer = window.confirm('Are you sure you want to delete?');
+		if (answer) {
+			handleDelete(slug);
+		}
+	};
+
+	const handleDelete = async (slug) => {
+		try {
+			const response = await axios.delete(`${API}/category/${slug}`, {
+				headers: {
+					Authorization: `Bearer ${token}`
+				}
+			});
+			loadCategories();
+		} catch (err) {}
 	};
 
 	const listCategories = () =>
@@ -45,14 +61,14 @@ const Read = ({ user, token }) => {
 						<Link href={`/admin/category/${category.slug}`}>
 							<button
 								className="btn-primary mr-4"
-								onClick={() => confirmDelete(category.slug)}
+								onClick={(e) => confirmDelete(e, category.slug)}
 							>
 								Update
 							</button>
 						</Link>
 						<button
 							className="btn-primary"
-							onClick={() => confirmDelete(category.slug)}
+							onClick={(e) => confirmDelete(e, category.slug)}
 						>
 							Delete
 						</button>

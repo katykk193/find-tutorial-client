@@ -5,9 +5,7 @@ const Admin = ({ user }) => (
 	<>
 		<h1>Admin Dashboard</h1>
 		<div>
-			<Link href="/admin/category/create">
-				<a>Create category</a>
-			</Link>
+			<a href="/admin/category/create">Create category</a>
 		</div>
 		<div>
 			<Link href="/admin/category/read">

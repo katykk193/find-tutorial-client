@@ -34,7 +34,7 @@ const ForgotPassword = () => {
 			setState({
 				...state,
 				buttonText: 'Forgot Password',
-				error: err.response.data.error
+				error: err.response ? err.response.data.error : err.onString()
 			});
 		}
 	};

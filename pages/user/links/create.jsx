@@ -79,7 +79,7 @@ const Create = ({ token }) => {
 		} catch (err) {
 			setState({
 				...state,
-				error: err.response.data.error,
+				error: err.response ? err.response.data.error : err.onString(),
 				buttonText: 'Post'
 			});
 		}

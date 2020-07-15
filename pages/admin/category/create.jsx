@@ -76,7 +76,7 @@ const Create = ({ user, token }) => {
 					}
 				}
 			);
-			setimageUploadButtonName('Upload image');
+			setImageUploadButtonName('Upload image');
 			setState({
 				...state,
 				name: '',
@@ -89,7 +89,7 @@ const Create = ({ user, token }) => {
 			setState({
 				...state,
 				buttonText: 'Create',
-				error: err.response.data.error
+				error: err.response ? err.response.data.error : err.onString()
 			});
 		}
 	};
