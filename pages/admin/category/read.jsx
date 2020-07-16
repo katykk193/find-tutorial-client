@@ -59,12 +59,7 @@ const Read = ({ user, token }) => {
 					</div>
 					<div>
 						<Link href={`/admin/category/${category.slug}`}>
-							<button
-								className="btn-primary mr-4"
-								onClick={(e) => confirmDelete(e, category.slug)}
-							>
-								Update
-							</button>
+							<button className="btn-primary mr-4">Update</button>
 						</Link>
 						<button
 							className="btn-primary"

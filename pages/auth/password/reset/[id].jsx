@@ -55,7 +55,7 @@ const ResetPassword = ({ router }) => {
 			setState({
 				...state,
 				buttonText: 'Forgot Password',
-				error: err.response ? err.response.data.error : err.onString()
+				error: err.response ? err.response.data.error : err.toString()
 			});
 		}
 	};

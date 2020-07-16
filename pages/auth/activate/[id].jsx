@@ -42,7 +42,7 @@ const ActivateAccount = ({ router }) => {
 			setState({
 				...state,
 				buttonText: 'Activate Account',
-				error: err.response ? err.response.data.error : err.onString()
+				error: err.response ? err.response.data.error : err.toString()
 			});
 		}
 	};

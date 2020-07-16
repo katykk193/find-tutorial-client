@@ -55,7 +55,7 @@ const Register = () => {
 			setState({
 				...state,
 				buttonText: 'Register',
-				error: err.response ? err.response.data.error : err.onString()
+				error: err.response ? err.response.data.error : err.toString()
 			});
 		}
 	};

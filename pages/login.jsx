@@ -51,7 +51,7 @@ const Login = () => {
 			setState({
 				...state,
 				buttonText: 'Login',
-				error: err.response ? err.response.data.error : err.onString()
+				error: err.response ? err.response.data.error : err.toString()
 			});
 		}
 	};

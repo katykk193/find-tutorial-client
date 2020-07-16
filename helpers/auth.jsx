@@ -34,9 +34,6 @@ export const getCookieFromServer = (key, req) => {
 		return undefined;
 	}
 
-	console.log('header cookie', req.headers.cookie);
-	console.log('key', key);
-
 	let token = req.headers.cookie
 		.split(';')
 		.find((c) => c.trim().startsWith(`${key}=`));

@@ -3,8 +3,8 @@ import { API } from '../config';
 import { getCookie } from '../helpers/auth';
 
 const withAdmin = (Page) => {
-	const WithAuthAdmin = (props) => <Page {...props} />;
-	WithAuthAdmin.getInitialProps = async (context) => {
+	const WithAdminUser = (props) => <Page {...props} />;
+	WithAdminUser.getInitialProps = async (context) => {
 		const token = getCookie('token', context.req);
 		let user = null;
 
@@ -27,7 +27,7 @@ const withAdmin = (Page) => {
 		if (user) {
 			return {
 				...(Page.getInitialProps
-					? await Page.getInitailProps(context)
+					? await Page.getInitialProps(context)
 					: {}),
 				user,
 				token
@@ -40,7 +40,7 @@ const withAdmin = (Page) => {
 		}
 	};
 
-	return WithAuthAdmin;
+	return WithAdminUser;
 };
 
 export default withAdmin;
