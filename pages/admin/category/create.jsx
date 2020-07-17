@@ -8,7 +8,6 @@ const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
 import withAdmin from '../../withAdmin';
 import { showSuccessMessage, showErrorMessage } from '../../../helpers/alerts';
-import { set } from 'js-cookie';
 
 const Create = ({ token }) => {
 	const [state, setState] = useState({
@@ -20,6 +19,7 @@ const Create = ({ token }) => {
 	});
 
 	const [content, setContent] = useState('');
+	const [imagePreview, setImagePreview] = useState();
 
 	const [imageUploadButtonName, setImageUploadButtonName] = useState(
 		'Upload image'
@@ -42,12 +42,9 @@ const Create = ({ token }) => {
 	};
 
 	const handleImage = (event) => {
-		let fileInput = false;
 		if (event.target.files[0]) {
-			fileInput = true;
-		}
-		setImageUploadButtonName(event.target.files[0].name);
-		if (fileInput) {
+			setImagePreview(URL.createObjectURL(event.target.files[0]));
+			setImageUploadButtonName(event.target.files[0].name);
 			Resizer.imageFileResizer(
 				event.target.files[0],
 				300,
@@ -56,7 +53,12 @@ const Create = ({ token }) => {
 				100,
 				0,
 				(uri) => {
-					setState({ ...state, image: uri, success: '', error: '' });
+					setState({
+						...state,
+						image: uri,
+						success: '',
+						error: ''
+					});
 				},
 				'base64'
 			);
@@ -78,6 +80,7 @@ const Create = ({ token }) => {
 			);
 			setImageUploadButtonName('Upload image');
 			setContent('');
+			setImagePreview('');
 			setState({
 				...state,
 				name: '',
@@ -102,7 +105,7 @@ const Create = ({ token }) => {
 			{success && showSuccessMessage(success)}
 			{error && showErrorMessage(error)}
 			<div className="w-full mt-4">
-				<label className="text-gray-600">Name</label>
+				<label className="text-gray-600 px-4">Name</label>
 				<input
 					value={name}
 					onChange={handleChange('name')}
@@ -112,7 +115,7 @@ const Create = ({ token }) => {
 				/>
 			</div>
 			<div className="w-full mt-4">
-				<label className="text-gray-600">Content</label>
+				<label className="text-gray-600 px-4">Content</label>
 				<ReactQuill
 					value={content}
 					onChange={handleContent}
@@ -132,6 +135,13 @@ const Create = ({ token }) => {
 						hidden
 					/>
 				</label>
+				{imagePreview && (
+					<img
+						className="my-4 w-32"
+						src={imagePreview}
+						alt="upload image"
+					/>
+				)}
 			</div>
 			<div className="w-full mt-8 items-start">
 				<button className="shadow-xl bg-purple-400 hover:bg-purple-300 text-white font-bold py-2 px-4 rounded">

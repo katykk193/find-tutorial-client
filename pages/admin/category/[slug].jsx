@@ -15,17 +15,18 @@ const Update = ({ oldCategory, token }) => {
 		success: '',
 		error: '',
 		buttonText: 'Update',
-		imagePreview: oldCategory.image.url,
 		image: ''
 	});
 
 	const [content, setContent] = useState(oldCategory.content);
 
+	const [imagePreview, setImagePreview] = useState(oldCategory.image.url);
+
 	const [imageUploadButtonName, setImageUploadButtonName] = useState(
 		'Update image'
 	);
 
-	const { name, image, success, error, buttonText, imagePreview } = state;
+	const { name, image, success, error, buttonText } = state;
 
 	const handleChange = (name) => (e) => {
 		setState({
@@ -42,12 +43,9 @@ const Update = ({ oldCategory, token }) => {
 	};
 
 	const handleImage = (event) => {
-		let fileInput = false;
 		if (event.target.files[0]) {
-			fileInput = true;
-		}
-		setImageUploadButtonName(event.target.files[0].name);
-		if (fileInput) {
+			setImagePreview(URL.createObjectURL(event.target.files[0]));
+			setImageUploadButtonName(event.target.files[0].name);
 			Resizer.imageFileResizer(
 				event.target.files[0],
 				300,
@@ -125,11 +123,6 @@ const Update = ({ oldCategory, token }) => {
 			<div className="w-full mt-4">
 				<label className="text-gray-600 hover:text-white hover:bg-gray-600 py-2 px-4 rounded cursor-pointer">
 					{imageUploadButtonName}
-					{imagePreview && (
-						<span>
-							<img src={imagePreview} alt="image" height="20" />
-						</span>
-					)}
 					<input
 						onChange={handleImage}
 						type="file"
@@ -138,6 +131,13 @@ const Update = ({ oldCategory, token }) => {
 						hidden
 					/>
 				</label>
+				{imagePreview && (
+					<img
+						className="my-4 w-32"
+						src={imagePreview}
+						alt="upload image"
+					/>
+				)}
 			</div>
 			<div className="w-full mt-8 items-start">
 				<button className="shadow-xl bg-purple-400 hover:bg-purple-300 text-white font-bold py-2 px-4 rounded">
