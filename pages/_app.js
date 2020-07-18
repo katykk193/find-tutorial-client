@@ -35,7 +35,7 @@ export default function App({ Component, pageProps }) {
 								Home
 							</a>
 						</Link>
-						<Link href="/user/links/create">
+						<Link href="/user/link/create">
 							<a className="block lg:inline-block lg:mt-0 text-gray-500 hover:text-purple-600 hover:font-bold mr-8">
 								Submit a link
 							</a>

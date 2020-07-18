@@ -26,21 +26,22 @@ const withUser = (Page) => {
 				}
 			}
 		}
+		
 		if (user) {
 			return {
 				...(Page.getInitialProps
-					? await Page.getInitailProps(context)
+					? await Page.getInitialProps(context)
 					: {}),
 				user,
 				token,
 				userLinks
 			};
-		} else {
-			context.res.writeHead(302, {
-				Location: '/'
-			});
-			context.res.end();
 		}
+
+		context.res.writeHead(302, {
+			Location: '/'
+		});
+		context.res.end();
 	};
 
 	return WithAuthUser;

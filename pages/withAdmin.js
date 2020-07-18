@@ -35,12 +35,11 @@ const withAdmin = (Page) => {
 				token,
 				userLinks
 			};
-		} else {
-			context.res.writeHead(302, {
-				Location: '/'
-			});
-			context.res.end();
 		}
+		context.res.writeHead(302, {
+			Location: '/'
+		});
+		context.res.end();
 	};
 
 	return WithAdminUser;

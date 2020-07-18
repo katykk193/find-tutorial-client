@@ -1,9 +1,7 @@
-import withUser from '../withUser';
-
 import Link from 'next/link';
 import axios from 'axios';
+import withUser from '../withUser';
 import { API } from '../../config';
-import { Router } from 'next/router';
 import moment from 'moment';
 
 const User = ({ user, userLinks, token }) => {
@@ -64,7 +62,7 @@ const User = ({ user, userLinks, token }) => {
 						))}
 						<span className="mr-4">{clicks} clicks</span>
 
-						<Link href={`/user/link/${slug}`}>
+						<Link href={`/user/link/${_id}`}>
 							<span className="mr-4">Update</span>
 						</Link>
 
@@ -88,7 +86,7 @@ const User = ({ user, userLinks, token }) => {
 				<ul>
 					<li>
 						<Link href="/user/link/create">
-							<a href="">Sugmit a link </a>
+							<a href="">Submit a link </a>
 						</Link>
 					</li>
 					<li>
