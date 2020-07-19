@@ -12,10 +12,55 @@ const Register = () => {
 		password: '',
 		error: '',
 		success: '',
-		buttonText: 'Register'
+		buttonText: 'Register',
+		loadedCategories: [],
+		categories: []
 	});
 
-	const { name, email, password, error, success, buttonText } = state;
+	const {
+		name,
+		email,
+		password,
+		error,
+		success,
+		buttonText,
+		loadedCategories,
+		categories
+	} = state;
+
+	useEffect(() => {
+		loadCategories();
+	}, [success]);
+
+	const loadCategories = async () => {
+		const response = await axios.get(`${API}/categories`);
+		setState({ ...state, loadedCategories: response.data });
+	};
+
+	const handleToggle = (category) => () => {
+		const clickedCategory = categories.indexOf(category);
+		const all = [...categories];
+
+		if (clickedCategory === -1) {
+			all.push(category);
+		} else {
+			all.splice(clickedCategory, 1);
+		}
+
+		setState({ ...state, categories: all, success: '', error: '' });
+	};
+
+	const showCategories = () => {
+		return (
+			loadedCategories &&
+			loadedCategories.map(({ _id, name }) => (
+				<div key={_id}>
+					<input type="checkbox" onChange={handleToggle(_id)} />
+					<label>{name}</label>
+				</div>
+			))
+		);
+	};
 
 	useEffect(() => {
 		isAuth() && Router.push('/');
@@ -40,7 +85,8 @@ const Register = () => {
 			const response = await axios.post(`${API}/register`, {
 				name,
 				email,
-				password
+				password,
+				categories
 			});
 
 			setState({
@@ -96,6 +142,12 @@ const Register = () => {
 					placeholder="Type your password"
 					required
 				/>
+			</div>
+			<div className="w-full mt-4">
+				<label>Category</label>
+				<ul className="h-24 ml-5 overflow-scroll">
+					{showCategories()}
+				</ul>
 			</div>
 			<div className="w-full mt-8 items-start">
 				<button className="shadow-xl bg-purple-400 hover:bg-purple-300 text-white font-bold py-2 px-4 rounded">
