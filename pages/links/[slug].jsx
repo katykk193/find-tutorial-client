@@ -80,20 +80,6 @@ const Links = ({
 		setSkip(toSkip);
 	};
 
-	// const loadMoreButton = () => {
-	// 	return (
-	// 		size > 0 &&
-	// 		size >= limit && (
-	// 			<button
-	// 				onClick={loadMore}
-	// 				className="transitin ease-in btn-primary px-4 py-3 rounded"
-	// 			>
-	// 				Load more
-	// 			</button>
-	// 		)
-	// 	);
-	// };
-
 	return (
 		<>
 			<div>
@@ -105,7 +91,6 @@ const Links = ({
 					<img src={category.image.url} alt={category.name} />
 				</div>
 			</div>
-			{/* <div className="pt-4 pb-5">{loadMoreButton()}</div> */}
 
 			<InfiniteScroll
 				pageStart={0}

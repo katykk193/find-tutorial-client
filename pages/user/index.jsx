@@ -29,7 +29,6 @@ const User = ({ user, userLinks, token }) => {
 		userLinks.map(
 			({
 				_id,
-				slug,
 				title,
 				url,
 				type,
@@ -57,8 +56,8 @@ const User = ({ user, userLinks, token }) => {
 						<span className="mr-4">
 							{type}/{medium}
 						</span>
-						{categories.map(({ name }) => (
-							<span className="mr-4">{name}</span>
+						{categories.map(({ _id, name }) => (
+							<span key={_id} className="mr-4">{name}</span>
 						))}
 						<span className="mr-4">{clicks} clicks</span>
 

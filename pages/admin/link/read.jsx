@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import axios from 'axios';
-import renderHTML from 'react-render-html';
+import Link from 'next/link';
 import moment from 'moment';
 import { API } from '../../../config';
 import InfiniteScroll from 'react-infinite-scroller';
 import withAdmin from '../../withAdmin';
 import { getCookie } from '../../../helpers/auth';
 
-const Read = ({ links, totalLinks, linksLimit, linkSkip, token }) => {
+const Links = ({ links, totalLinks, linksLimit, linkSkip, token }) => {
 	const [allLinks, setAllLinks] = useState(links);
 	const [limit, setLimit] = useState(linksLimit);
 	const [skip, setSkip] = useState(0);
@@ -40,7 +40,9 @@ const Read = ({ links, totalLinks, linksLimit, linkSkip, token }) => {
 							</span>
 
 							<span className="mr-4">{clicks} clicks</span>
+						</div>
 
+						<div>
 							<span className="mr-4">
 								{type}/{medium}
 							</span>
@@ -49,6 +51,16 @@ const Read = ({ links, totalLinks, linksLimit, linkSkip, token }) => {
 									{name}
 								</span>
 							))}
+
+							<span
+								className="mr-4"
+								onClick={(e) => confirmDelete(e, _id)}
+							>
+								Delete
+							</span>
+							<Link href={`/admin/link${_id}`}>
+								<a className="mr-4">Update</a>
+							</Link>
 						</div>
 					</div>
 				</div>
@@ -70,6 +82,28 @@ const Read = ({ links, totalLinks, linksLimit, linkSkip, token }) => {
 		setSkip(toSkip);
 	};
 
+	const confirmDelete = (e, id) => {
+		e.preventDefault();
+
+		let answer = window.confirm('Are you sure you want to delete?');
+		if (answer) {
+			handleDelete(id);
+		}
+	};
+
+	const handleDelete = async (id) => {
+		try {
+			const response = await axios.delete(`${API}/link/admin/${id}`, {
+				headers: {
+					Authorization: `Bearer ${token}`
+				}
+			});
+
+			console.log('process', process.browser);
+			process.browser && window.location.reload();
+		} catch (err) {}
+	};
+
 	return (
 		<>
 			<div>
@@ -77,7 +111,6 @@ const Read = ({ links, totalLinks, linksLimit, linkSkip, token }) => {
 					<h1 className="mb-4">All Links</h1>
 				</div>
 			</div>
-			{/* <div className="pt-4 pb-5">{loadMoreButton()}</div> */}
 
 			<InfiniteScroll
 				pageStart={0}
@@ -91,7 +124,7 @@ const Read = ({ links, totalLinks, linksLimit, linkSkip, token }) => {
 	);
 };
 
-Read.getInitialProps = async ({ req }) => {
+Links.getInitialProps = async ({ req }) => {
 	let skip = 0;
 	let limit = 2;
 
@@ -115,4 +148,4 @@ Read.getInitialProps = async ({ req }) => {
 	};
 };
 
-export default withAdmin(Read);
+export default withAdmin(Links);
