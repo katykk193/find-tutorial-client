@@ -12,6 +12,11 @@ const Admin = ({ user }) => (
 				<a>All categories</a>
 			</Link>
 		</div>
+		<div>
+			<Link href="/admin/link/read">
+				<a>All links</a>
+			</Link>
+		</div>
 	</>
 );
 

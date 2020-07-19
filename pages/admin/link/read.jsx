@@ -2,31 +2,16 @@ import { useState } from 'react';
 import axios from 'axios';
 import renderHTML from 'react-render-html';
 import moment from 'moment';
-import { API } from '../../config';
+import { API } from '../../../config';
 import InfiniteScroll from 'react-infinite-scroller';
+import withAdmin from '../../withAdmin';
+import { getCookie } from '../../../helpers/auth';
 
-const Links = ({
-	query,
-	category,
-	links,
-	totalLinks,
-	linksLimit,
-	linkSkip
-}) => {
+const Read = ({ links, totalLinks, linksLimit, linkSkip, token }) => {
 	const [allLinks, setAllLinks] = useState(links);
 	const [limit, setLimit] = useState(linksLimit);
 	const [skip, setSkip] = useState(0);
 	const [size, setSize] = useState(totalLinks);
-
-	const handleClick = async (linkId) => {
-		const response = await axios.put(`${API}/click-count`, { linkId });
-		loadUpdatedLinks();
-	};
-
-	const loadUpdatedLinks = async () => {
-		const response = await axios.post(`${API}/category/${query.slug}`);
-		setAllLinks(response.data.links);
-	};
 
 	const listOfLinks = () =>
 		allLinks.map(
@@ -73,36 +58,23 @@ const Links = ({
 	const loadMore = async () => {
 		let toSkip = skip + limit;
 		const response = await axios.get(
-			`${API}/category/${query.slug}?skip=${toSkip}&limit=${limit}`
+			`${API}/links?skip=${toSkip}&limit=${limit}`,
+			{
+				headers: {
+					Authorization: `Bearer ${token}`
+				}
+			}
 		);
-		setAllLinks([...allLinks, ...response.data.links]);
-		setSize(response.data.links.length);
+		setAllLinks([...allLinks, ...response.data]);
+		setSize(response.data.length);
 		setSkip(toSkip);
 	};
-
-	// const loadMoreButton = () => {
-	// 	return (
-	// 		size > 0 &&
-	// 		size >= limit && (
-	// 			<button
-	// 				onClick={loadMore}
-	// 				className="transitin ease-in btn-primary px-4 py-3 rounded"
-	// 			>
-	// 				Load more
-	// 			</button>
-	// 		)
-	// 	);
-	// };
 
 	return (
 		<>
 			<div>
 				<div>
-					<h1 className="mb-4">{category.name} - URL/Links</h1>
-					<div className="mb-4">{renderHTML(category.content)}</div>
-				</div>
-				<div>
-					<img src={category.image.url} alt={category.name} />
+					<h1 className="mb-4">All Links</h1>
 				</div>
 			</div>
 			{/* <div className="pt-4 pb-5">{loadMoreButton()}</div> */}
@@ -114,31 +86,33 @@ const Links = ({
 				loader={<img key={0} src="/images/loader.gif" alt="loading" />}
 			>
 				<div>{listOfLinks()}</div>
-				<div>
-					<h2>Most popular in {category.name}</h2>
-					<p>show popular links</p>
-				</div>
 			</InfiniteScroll>
 		</>
 	);
 };
 
-Links.getInitialProps = async ({ query, req }) => {
+Read.getInitialProps = async ({ req }) => {
 	let skip = 0;
 	let limit = 2;
 
+	const token = getCookie('token', req);
+
 	const response = await axios.get(
-		`${API}/category/${query.slug}?skip=${skip}&limit=${limit}`
+		`${API}/links?skip=${skip}&limit=${limit}`,
+		{
+			headers: {
+				Authorization: `Bearer ${token}`
+			}
+		}
 	);
 
 	return {
-		query,
-		category: response.data.category,
-		links: response.data.links,
-		totalLinks: response.data.links.length,
+		links: response.data,
+		totalLinks: response.data.length,
 		linksLimit: limit,
-		linkSkip: skip
+		linkSkip: skip,
+		token
 	};
 };
 
-export default Links;
+export default withAdmin(Read);
