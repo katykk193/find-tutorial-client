@@ -56,9 +56,11 @@ const User = ({ user, userLinks, token }) => {
 						<span className="mr-4">
 							{type}/{medium}
 						</span>
+						
 						{categories.map(({ _id, name }) => (
 							<span key={_id} className="mr-4">{name}</span>
 						))}
+
 						<span className="mr-4">{clicks} clicks</span>
 
 						<Link href={`/user/link/${_id}`}>

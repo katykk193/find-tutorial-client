@@ -58,7 +58,7 @@ const Links = ({ links, totalLinks, linksLimit, linkSkip, token }) => {
 							>
 								Delete
 							</span>
-							<Link href={`/admin/link${_id}`}>
+							<Link href={`/user/link/${_id}`}>
 								<a className="mr-4">Update</a>
 							</Link>
 						</div>
@@ -99,7 +99,6 @@ const Links = ({ links, totalLinks, linksLimit, linkSkip, token }) => {
 				}
 			});
 
-			console.log('process', process.browser);
 			process.browser && window.location.reload();
 		} catch (err) {}
 	};

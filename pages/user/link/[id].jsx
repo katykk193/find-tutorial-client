@@ -48,10 +48,17 @@ const Update = ({ oldLink, token }) => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+
+		let dynamicUpdateUrl = '';
+		if (isAuth && isAuth().role === 'admin') {
+			dynamicUpdateUrl = `${API}/link/admin/${oldLink._id}`;
+		} else {
+			dynamicUpdateUrl = `${API}/link/${oldLink._id}`;
+		}
 		setState({ ...state, buttonText: 'Updating' });
 		try {
 			const response = await axios.put(
-				`${API}/link/${oldLink._id}`,
+				dynamicUpdateUrl,
 				{
 					title,
 					url,
@@ -105,7 +112,11 @@ const Update = ({ oldLink, token }) => {
 			loadedCategories &&
 			loadedCategories.map(({ _id, name }) => (
 				<div key={_id}>
-					<input type="checkbox" checked={categories.includes(_id)} onChange={handleToggle(_id)} />
+					<input
+						type="checkbox"
+						checked={categories.includes(_id)}
+						onChange={handleToggle(_id)}
+					/>
 					<label>{name}</label>
 				</div>
 			))
