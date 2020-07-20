@@ -17,6 +17,11 @@ const Admin = ({ user }) => (
 				<a>All links</a>
 			</Link>
 		</div>
+		<div>
+			<Link href="/user/profile/update">
+				<a>Profile update</a>
+			</Link>
+		</div>
 	</>
 );
 
