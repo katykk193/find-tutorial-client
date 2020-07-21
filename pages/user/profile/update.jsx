@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { showSuccessMessage, showErrorMessage } from '../../../helpers/alerts';
+import { updateUser } from '../../../helpers/auth';
 import { API } from '../../../config';
 import withUser from '../../withUser';
 
@@ -78,7 +79,7 @@ const Profile = ({ user, token }) => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		setState({ ...state, buttonText: 'Updateing' });
+		setState({ ...state, buttonText: 'Updating' });
 
 		try {
 			const response = await axios.put(
@@ -95,10 +96,12 @@ const Profile = ({ user, token }) => {
 				}
 			);
 
-			setState({
-				...state,
-				buttonText: 'Updated',
-				success: 'Profile updated successfully'
+			updateUser(response.data, () => {
+				setState({
+					...state,
+					buttonText: 'Updated',
+					success: 'Profile updated successfully'
+				});
 			});
 		} catch (err) {
 			setState({

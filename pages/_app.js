@@ -21,13 +21,6 @@ export default function App({ Component, pageProps }) {
 			</Head>
 
 			<div className="mx-64 overflow-scroll my-16 fixed inset-0 shadow-xl bg-white p-8 sm:p-12 large-border-radius">
-				{/* <div className="h-48 medium-border-radius w-full sm:h-full overflow-hidden bg-image shadow-xl">
-					<img
-						className="sm:h-full sm:w-full"
-						src="/images/1.jpeg"
-						alt="bg-image"
-					/>
-				</div> */}
 				<div className="rounded-lg overflow-scroll">
 					<nav className="flex items-center sm:text-lg mb-10 sm:mb-10">
 						<Link href="/">
