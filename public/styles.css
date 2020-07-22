@@ -5,19 +5,17 @@
 @tailwind utilities;
 
 body {
-	background: linear-gradient(
+	/* background: linear-gradient(
 		160deg,
 		rgba(119, 151, 232, 1) 0%,
 		rgba(184, 168, 224, 1) 100%
-	);
+	); */
 	width: 100vw;
 	height: 100vh;
-	overflow: hidden;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+	overflow: scroll;
 	background-size: cover;
 	background-repeat: repeat;
+	font-family: 'Montserrat', sans-serif;
 }
 
 .large-border-radius {
@@ -49,4 +47,8 @@ body {
 
 .btn-primary:hover {
 	background-size: 400% 100%;
+}
+
+a {
+	cursor: pointer;
 }

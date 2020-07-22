@@ -18,58 +18,69 @@ export default function App({ Component, pageProps }) {
 		<>
 			<Head>
 				<link rel="stylesheet" type="text/css" href="/styles.css" />
+				<link
+					href="http://fonts.googleapis.com/css?family=Montserrat:400,700"
+					rel="stylesheet"
+					type="text/css"
+				/>
 			</Head>
-
-			<div className="mx-64 overflow-scroll my-16 fixed inset-0 shadow-xl bg-white p-8 sm:p-12 large-border-radius">
-				<div className="rounded-lg overflow-scroll">
-					<nav className="flex items-center sm:text-lg mb-10 sm:mb-10">
-						<Link href="/">
-							<a className="block lg:inline-block lg:mt-0 text-gray-500 hover:text-purple-600 hover:font-bold mr-8">
-								Home
-							</a>
-						</Link>
+			<nav className="flex justify-between items-center bg-white py-5 px-16 fixed top-0 left-0 w-screen h-16 shadow-md">
+				<Link href="/">
+					<a className="text-3xl text-red-500 font-bold">Hacker</a>
+				</Link>
+				<div className="flex items-center sm:text-lg">
+					<Link href="/">
+						<a className="text-gray-600 hover:text-red-500 mr-8">
+							Home
+						</a>
+					</Link>
+					{isAuth() && (
 						<Link href="/user/link/create">
-							<a className="block lg:inline-block lg:mt-0 text-gray-500 hover:text-purple-600 hover:font-bold mr-8">
+							<a className="text-gray-600 hover:text-red-500 mr-8">
 								Submit a link
 							</a>
 						</Link>
-						{!isAuth() && (
-							<>
-								<Link href="/login">
-									<a className="block lg:inline-block lg:mt-0 text-gray-500 hover:text-purple-600 hover:font-bold mr-8">
-										Login
-									</a>
-								</Link>
-								<Link href="/register">
-									<a className="block lg:inline-block lg:mt-0 text-gray-500 hover:text-purple-600 hover:font-bold mr-8">
-										Register
-									</a>
-								</Link>
-							</>
-						)}
-						{isAuth() && isAuth().role === 'admin' && (
-							<Link href="/admin">
-								<a className="block ml-auto lg:inline-block lg:mt-0 text-gray-500 hover:text-purple-600 hover:font-bold mr-8">
-									{isAuth().name}
+					)}
+					{!isAuth() && (
+						<>
+							<Link href="/login">
+								<a className="text-gray-600 hover:text-red-500 mr-8">
+									Login
 								</a>
 							</Link>
-						)}
-						{isAuth() && isAuth().role === 'subscriber' && (
-							<Link href="/user">
-								<a className="block ml-auto lg:inline-block lg:mt-0 text-gray-500 hover:text-purple-600 hover:font-bold mr-8">
-									{isAuth().name}
+							<Link href="/register">
+								<a className="text-gray-600 hover:text-red-500 mr-8">
+									Register
 								</a>
 							</Link>
-						)}
+						</>
+					)}
+					{isAuth() && isAuth().role === 'admin' && (
+						<Link href="/admin">
+							<a className="text-gray-600 hover:text-red-500 mr-8">
+								{isAuth().name}
+							</a>
+						</Link>
+					)}
+					{isAuth() && isAuth().role === 'subscriber' && (
+						<Link href="/user">
+							<a className="text-gray-600 hover:text-red-500 mr-8">
+								{isAuth().name}
+							</a>
+						</Link>
+					)}
+					{isAuth() && (
 						<a
 							onClick={logout}
-							className="block lg:inline-block lg:mt-0 text-gray-500 hover:text-purple-600 hover:font-bold mr-8"
+							className="text-gray-600 hover:text-red-500 mr-8"
 						>
 							Logout
 						</a>
-					</nav>
-					<Component {...pageProps} />
+					)}
 				</div>
+			</nav>
+			<div className="mt-16 px-16 py-10">
+				<Component {...pageProps} />
 			</div>
 		</>
 	);
