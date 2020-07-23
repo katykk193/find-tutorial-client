@@ -4,6 +4,10 @@
 
 @tailwind utilities;
 
+* {
+	box-sizing: border-box;
+}
+
 body {
 	/* background: linear-gradient(
 		160deg,
@@ -31,15 +35,11 @@ body {
 }
 
 .bg-primary {
-	background: linear-gradient(
-		160deg,
-		rgba(119, 151, 232, 1) 0%,
-		rgba(184, 168, 224, 1) 100%
-	);
+	background: linear-gradient(45deg, #ee76ad 0%, #efac78 100%);
 }
 
 .btn-primary {
-	background: linear-gradient(to right, #25aae1, #40e495, #30dd8a, #2bb673);
+	background: linear-gradient(45deg, #ee76ad 0%, #efac78 100%);
 	color: #fff;
 	padding: 0.5rem 1rem;
 	border-radius: 0.2rem;

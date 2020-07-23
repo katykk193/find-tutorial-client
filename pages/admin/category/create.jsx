@@ -21,10 +21,6 @@ const Create = ({ token }) => {
 	const [content, setContent] = useState('');
 	const [imagePreview, setImagePreview] = useState();
 
-	const [imageUploadButtonName, setImageUploadButtonName] = useState(
-		'Upload image'
-	);
-
 	const { name, image, success, error, buttonText } = state;
 
 	const handleChange = (name) => (e) => {
@@ -44,7 +40,6 @@ const Create = ({ token }) => {
 	const handleImage = (event) => {
 		if (event.target.files[0]) {
 			setImagePreview(URL.createObjectURL(event.target.files[0]));
-			setImageUploadButtonName(event.target.files[0].name);
 			Resizer.imageFileResizer(
 				event.target.files[0],
 				300,
@@ -78,7 +73,6 @@ const Create = ({ token }) => {
 					}
 				}
 			);
-			setImageUploadButtonName('Upload image');
 			setContent('');
 			setImagePreview('');
 			setState({
@@ -98,35 +92,37 @@ const Create = ({ token }) => {
 	};
 
 	const createCategoryForm = () => (
-		<form className="w-full px-16" onSubmit={handleSubmit}>
-			<h1 className="mt-4 mb-5 sm:mb-5 text-2xl md:text-5xl text-purple-400 font-bold">
+		<form
+			className="bg-white p-10 my-24 mx-5 shadow-xl w-full md:w-1/2 lg:w-1/3"
+			onSubmit={handleSubmit}
+		>
+			<h2 className="mb-4 text-2xl text-red-400 font-semibold">
 				Create category
-			</h1>
+			</h2>
 			{success && showSuccessMessage(success)}
 			{error && showErrorMessage(error)}
 			<div className="w-full mt-4">
-				<label className="text-gray-600 px-4">Name</label>
 				<input
 					value={name}
 					onChange={handleChange('name')}
 					type="text"
-					className="shadow-xl appearance-none border rounded w-full py-2 px-3 text-gray-700"
+					placeholder="Name"
+					className="shadow border appearance-none border rounded w-full py-2 px-3 text-gray-600 focus:shadow-xl"
 					required
 				/>
 			</div>
-			<div className="w-full mt-4">
-				<label className="text-gray-600 px-4">Content</label>
+			<div className="w-full mt-6 mb-10 text-gray-600 focus:shadow-xl">
 				<ReactQuill
 					value={content}
 					onChange={handleContent}
-					placeholder="Write something..."
+					placeholder="Content..."
 					theme="bubble"
-					className="shadow-xl appearance-none border rounded w-full py-2 px-3 text-gray-700 h-24"
+					className="shadow appearance-none border rounded w-full h-24 text-gray-600 mb-3 focus:shadow-xl"
 				></ReactQuill>
 			</div>
 			<div className="w-full mt-4">
-				<label className="text-gray-600 hover:text-white hover:bg-gray-600 py-2 px-4 rounded cursor-pointer">
-					{imageUploadButtonName}
+				<label className="text-red-500 bg-pink-200 border border-pink-200 hover:border-pink-500 hover:bg-white py-2 px-4 rounded cursor-pointer">
+					Upload image
 					<input
 						onChange={handleImage}
 						type="file"
@@ -136,22 +132,24 @@ const Create = ({ token }) => {
 					/>
 				</label>
 				{imagePreview && (
-					<img
-						className="my-4 w-32"
-						src={imagePreview}
-						alt="upload image"
-					/>
+					<div className="w-24 h-24">
+						<img
+							className="mt-8 mb-4 w-32"
+							src={imagePreview}
+							alt="upload image"
+						/>
+					</div>
 				)}
 			</div>
 			<div className="w-full mt-8 items-start">
-				<button className="shadow-xl bg-purple-400 hover:bg-purple-300 text-white font-bold py-2 px-4 rounded">
+				<button className="shadow-xl btn-primary text-white font-bold py-2 px-4 rounded">
 					{buttonText}
 				</button>
 			</div>
 		</form>
 	);
 
-	return <>{createCategoryForm()}</>;
+	return <div className="flex justify-center">{createCategoryForm()}</div>;
 };
 
 export default withAdmin(Create);

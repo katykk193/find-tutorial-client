@@ -57,10 +57,10 @@ const Login = () => {
 	};
 
 	const loginForm = () => (
-		<form className="w-full max-w-sm" onSubmit={handleSubmit}>
-			<h1 className="mt-4 mb-5 sm:mb-20 text-2xl md:text-5xl text-purple-400 font-bold">
+		<form className="bg-white p-10 my-24 mx-5 shadow-xl w-full md:w-1/2 lg:w-1/3" onSubmit={handleSubmit}>
+			<h2 className="mb-8 text-2xl text-red-400 font-semibold">
 				Login
-			</h1>
+			</h2>
 			{success && showSuccessMessage(success)}
 			{error && showErrorMessage(error)}
 			<div className="w-full mt-4">
@@ -68,7 +68,7 @@ const Login = () => {
 					value={email}
 					onChange={handleChange('email')}
 					type="email"
-					className="shadow-xl appearance-none border rounded w-full py-2 px-3 text-gray-700"
+					className="shadow border appearance-none border rounded w-full py-2 px-3 text-gray-600 focus:shadow-xl"
 					placeholder="Type your email"
 					required
 				/>
@@ -78,27 +78,24 @@ const Login = () => {
 					value={password}
 					onChange={handleChange('password')}
 					type="password"
-					className="shadow-xl appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3"
+					className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-600 mb-3 focus:shadow-xl"
 					placeholder="Type your password"
 					required
 				/>
 			</div>
 			<div className="w-full mt-8 items-start">
-				<button className="shadow-xl bg-purple-400 hover:bg-purple-300 text-white font-bold py-2 px-4 rounded">
+				<button className="shadow-xl btn-primary text-white font-bold py-2 px-4 rounded">
 					{buttonText}
 				</button>
+				<Link href="/auth/password/forgot">
+					<a className="float-right text-red-500 border-b border-transparent hover:border-red-500">
+						Forgot Password
+					</a>
+				</Link>
 			</div>
 		</form>
 	);
-	return (
-		<>
-			{JSON.stringify(isAuth())}
-			{loginForm()}
-			<Link href="/auth/password/forgot">
-				<a className="float-right text-red-600 border-b border-transparent hover:border-red-600">Forgot Password</a>
-			</Link>
-		</>
-	);
+	return <div className="flex justify-center">{loginForm()}</div>;
 };
 
 export default Login;
