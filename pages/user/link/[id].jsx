@@ -129,7 +129,7 @@ const Update = ({ oldLink, token }) => {
 				<label>
 					<input
 						type="radio"
-						onClick={handleTypeClick}
+						onChange={handleTypeClick}
 						checked={type === 'free'}
 						value="free"
 						name="type"
@@ -141,12 +141,12 @@ const Update = ({ oldLink, token }) => {
 				<label>
 					<input
 						type="radio"
-						onClick={handleTypeClick}
+						onChange={handleTypeClick}
 						checked={type === 'paid'}
 						value="paid"
 						name="type"
 					/>
-					paid
+					Paid
 				</label>
 			</div>
 		</div>
@@ -158,7 +158,7 @@ const Update = ({ oldLink, token }) => {
 				<label>
 					<input
 						type="radio"
-						onClick={handleMediumClick}
+						onChange={handleMediumClick}
 						checked={medium === 'video'}
 						value="video"
 						name="medium"
@@ -170,7 +170,7 @@ const Update = ({ oldLink, token }) => {
 				<label>
 					<input
 						type="radio"
-						onClick={handleMediumClick}
+						onChange={handleMediumClick}
 						checked={medium === 'book'}
 						value="book"
 						name="medium"

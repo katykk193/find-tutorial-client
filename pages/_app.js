@@ -26,7 +26,9 @@ export default function App({ Component, pageProps }) {
 			</Head>
 			<nav className="flex justify-between items-center bg-white py-5 px-4 md:px-16 fixed top-0 left-0 w-screen h-16 shadow-md z-50">
 				<Link href="/">
-					<a className="text-xl sm:text-3xl text-red-500 font-bold">Hacker</a>
+					<a className="text-xl sm:text-3xl text-red-500 font-bold">
+						Hacker
+					</a>
 				</Link>
 				<div className="flex items-center text-xs sm:text-lg">
 					<Link href="/">
@@ -34,13 +36,13 @@ export default function App({ Component, pageProps }) {
 							Home
 						</a>
 					</Link>
-					{isAuth() && (
-						<Link href="/user/link/create">
-							<a className="text-gray-600 hover:text-red-500 mr-3 md:mr-8">
-								Submit a link
-							</a>
-						</Link>
-					)}
+
+					<Link href="/user/link/create">
+						<a className="text-gray-600 hover:text-red-500 mr-3 md:mr-8">
+							Submit a link
+						</a>
+					</Link>
+
 					{!isAuth() && (
 						<>
 							<Link href="/login">
@@ -79,7 +81,7 @@ export default function App({ Component, pageProps }) {
 					)}
 				</div>
 			</nav>
-			<div className="mt-16 bg-pink-100 h-screen">
+			<div className="mt-16">
 				<Component {...pageProps} />
 			</div>
 		</>

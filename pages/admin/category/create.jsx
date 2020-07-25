@@ -93,7 +93,7 @@ const Create = ({ token }) => {
 
 	const createCategoryForm = () => (
 		<form
-			className="bg-white p-10 my-24 mx-5 shadow-xl w-full md:w-1/2 lg:w-1/3"
+			className="bg-white p-6 sm:p-10 my-6 sm:my-24 mx-5 shadow-xl w-full md:w-1/2 lg:w-1/3"
 			onSubmit={handleSubmit}
 		>
 			<h2 className="mb-4 text-2xl text-red-400 font-semibold">
@@ -101,25 +101,30 @@ const Create = ({ token }) => {
 			</h2>
 			{success && showSuccessMessage(success)}
 			{error && showErrorMessage(error)}
-			<div className="w-full mt-4">
-				<input
-					value={name}
-					onChange={handleChange('name')}
-					type="text"
-					placeholder="Name"
-					className="shadow border appearance-none border rounded w-full py-2 px-3 text-gray-600 focus:shadow-xl"
-					required
-				/>
+			<div className="text-gray-600">
+				<div className="w-full mt-4">
+					<label className="font-semibold">Name</label>
+					<input
+						value={name}
+						onChange={handleChange('name')}
+						type="text"
+						placeholder="Name"
+						className="shadow border appearance-none border rounded w-full py-2 px-3 focus:shadow-xl"
+						required
+					/>
+				</div>
+				<div className="w-full mt-6 mb-10 text-gray-600 focus:shadow-xl">
+					<label className="font-semibold">Content</label>
+					<ReactQuill
+						value={content}
+						onChange={handleContent}
+						placeholder="Content..."
+						theme="bubble"
+						className="shadow appearance-none border rounded w-full h-24 mb-3 focus:shadow-xl"
+					></ReactQuill>
+				</div>
 			</div>
-			<div className="w-full mt-6 mb-10 text-gray-600 focus:shadow-xl">
-				<ReactQuill
-					value={content}
-					onChange={handleContent}
-					placeholder="Content..."
-					theme="bubble"
-					className="shadow appearance-none border rounded w-full h-24 text-gray-600 mb-3 focus:shadow-xl"
-				></ReactQuill>
-			</div>
+
 			<div className="w-full mt-4">
 				<label className="text-red-500 bg-pink-200 border border-pink-200 hover:border-pink-500 hover:bg-white py-2 px-4 rounded cursor-pointer">
 					Upload image

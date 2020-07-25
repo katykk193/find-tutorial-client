@@ -57,23 +57,26 @@ const Login = () => {
 	};
 
 	const loginForm = () => (
-		<form className="bg-white p-10 my-24 mx-5 shadow-xl w-full md:w-1/2 lg:w-1/3" onSubmit={handleSubmit}>
-			<h2 className="mb-8 text-2xl text-red-400 font-semibold">
-				Login
-			</h2>
+		<form
+			className="bg-white p-10 my-10 sm:my-24 mx-5 shadow-xl w-full md:w-1/2 lg:w-1/3"
+			onSubmit={handleSubmit}
+		>
+			<h2 className="mb-8 text-2xl text-red-400 font-semibold">Login</h2>
 			{success && showSuccessMessage(success)}
 			{error && showErrorMessage(error)}
-			<div className="w-full mt-4">
+			<div className="w-full mt-4 text-gray-600">
+				<label className="font-semibold">Email</label>
 				<input
 					value={email}
 					onChange={handleChange('email')}
 					type="email"
-					className="shadow border appearance-none border rounded w-full py-2 px-3 text-gray-600 focus:shadow-xl"
+					className="shadow border appearance-none border rounded w-full py-2 px-3 focus:shadow-xl"
 					placeholder="Type your email"
 					required
 				/>
 			</div>
-			<div className="w-full mt-4">
+			<div className="w-full mt-4 text-gray-600">
+				<label className="font-semibold">Password</label>
 				<input
 					value={password}
 					onChange={handleChange('password')}

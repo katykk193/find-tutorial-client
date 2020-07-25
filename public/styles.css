@@ -9,11 +9,7 @@
 }
 
 body {
-	/* background: linear-gradient(
-		160deg,
-		rgba(119, 151, 232, 1) 0%,
-		rgba(184, 168, 224, 1) 100%
-	); */
+	background-color: #fff5f7;
 	width: 100vw;
 	height: 100vh;
 	overflow: scroll;
@@ -52,3 +48,24 @@ body {
 a {
 	cursor: pointer;
 }
+
+.loader {
+	border: 5px solid #fed7d7;
+	border-radius: 50%;
+	border-top: 5px solid #feb2b2;
+	width: 40px;
+	height: 40px;
+	-webkit-animation: spin 1s linear infinite; /* Safari */
+	animation: spin 1s linear infinite;
+  }
+  
+  /* Safari */
+  @-webkit-keyframes spin {
+	0% { -webkit-transform: rotate(0deg); }
+	100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+  }

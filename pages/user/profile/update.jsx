@@ -58,7 +58,7 @@ const Profile = ({ user, token }) => {
 					<input
 						type="checkbox"
 						onChange={handleToggle(_id)}
-						checked={categories.includes(_id)}
+						className="mr-2"
 					/>
 					<label>{name}</label>
 				</div>
@@ -113,56 +113,65 @@ const Profile = ({ user, token }) => {
 	};
 
 	const updateForm = () => (
-		<form className="w-full max-w-sm" onSubmit={handleSubmit}>
-			<h1 className="mt-4 mb-5 sm:mb-20 text-2xl sm:text-5xl text-purple-400 font-bold">
+		<form
+			className="bg-white p-6 sm:p-10 my-6 sm:my-24 mx-5 shadow-xl w-full md:w-1/2 xl:w-1/3"
+			onSubmit={handleSubmit}
+		>
+			<h1 className="mb-2 sm:mb-8 text-2xl text-red-400 font-semibold">
 				Update Profile
 			</h1>
 			{success && showSuccessMessage(success)}
 			{error && showErrorMessage(error)}
-			<div className="w-full mt-2">
-				<input
-					value={name}
-					onChange={handleChange('name')}
-					type="text"
-					className="shadow-xl appearance-none border rounded w-full py-2 px-3 text-gray-700"
-					placeholder="Type your name"
-					required
-				/>
+			<div className="mt-2 text-gray-600 text-sm">
+				<div className="w-full sm:mt-4">
+					<label className="font-semibold">Name</label>
+					<input
+						value={name}
+						onChange={handleChange('name')}
+						type="text"
+						className="shadow border appearance-none border rounded w-full py-2 px-3  focus:shadow-xl"
+						placeholder="Type your name"
+						required
+					/>
+				</div>
+				<div className="w-full mt-4">
+					<label className="font-semibold">Email</label>
+					<input
+						value={email}
+						onChange={handleChange('email')}
+						type="email"
+						className="shadow border appearance-none border rounded w-full py-2 px-3 focus:shadow-xl"
+						placeholder="Type your email"
+						required
+						disabled
+					/>
+				</div>
+				<div className="w-full mt-4">
+					<label className="font-semibold">Password</label>
+					<input
+						value={password}
+						onChange={handleChange('password')}
+						type="password"
+						className="shadow border appearance-none border rounded w-full py-2 px-3 focus:shadow-xl"
+						placeholder="Type your password"
+					/>
+				</div>
+				<div className="w-full mt-4">
+					<label className="font-semibold">Category</label>
+					<ul className="h-24 ml-5 overflow-scroll">
+						{showCategories()}
+					</ul>
+				</div>
 			</div>
-			<div className="w-full mt-4">
-				<input
-					value={email}
-					onChange={handleChange('email')}
-					type="email"
-					className="shadow-xl appearance-none border rounded w-full py-2 px-3 text-gray-700"
-					placeholder="Type your email"
-					required
-					disabled
-				/>
-			</div>
-			<div className="w-full mt-4">
-				<input
-					value={password}
-					onChange={handleChange('password')}
-					type="password"
-					className="shadow-xl appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3"
-					placeholder="Type your password"
-				/>
-			</div>
-			<div className="w-full mt-4">
-				<label>Category</label>
-				<ul className="h-24 ml-5 overflow-scroll">
-					{showCategories()}
-				</ul>
-			</div>
+
 			<div className="w-full mt-8 items-start">
-				<button className="shadow-xl bg-purple-400 hover:bg-purple-300 text-white font-bold py-2 px-4 rounded">
+				<button className="shadow-xl btn-primary text-white font-bold py-2 px-4 rounded">
 					{buttonText}
 				</button>
 			</div>
 		</form>
 	);
-	return <>{updateForm()}</>;
+	return <div className="flex justify-center">{updateForm()}</div>;
 };
 
 export default withUser(Profile);

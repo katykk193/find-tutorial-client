@@ -2,17 +2,16 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { API } from '../../../config';
 import Link from 'next/link';
-import { showSuccessMessage, showErrorMessage } from '../../../helpers/alerts';
 import withAdmin from '../../withAdmin';
 
-const Read = ({ user, token }) => {
+const Read = ({ token }) => {
 	const [state, setState] = useState({
 		error: '',
 		success: '',
 		categories: []
 	});
 
-	const { error, success, categories } = state;
+	const { categories } = state;
 
 	useEffect(() => {
 		loadCategories();
@@ -44,41 +43,50 @@ const Read = ({ user, token }) => {
 	};
 
 	const listCategories = () =>
-		categories.map((category) => (
-			<Link key={category._id} href={`/links/${category.slug}`}>
-				<a>
-					<div>
-						<img
-							src={category.image && category.image.url}
-							alt={category.name}
-							className="pr-3"
-						/>
-					</div>
-					<div>
-						<h3>{category.name}</h3>
-					</div>
-					<div>
-						<Link href={`/admin/category/${category.slug}`}>
-							<button className="btn-primary mr-4">Update</button>
-						</Link>
-						<button
-							className="btn-primary"
-							onClick={(e) => confirmDelete(e, category.slug)}
-						>
-							Delete
-						</button>
-					</div>
-				</a>
-			</Link>
+		categories.map(({ _id, slug, image, name }) => (
+			<div
+				key={_id}
+				className="bg-white m-4 p-4 flex justify-center items-center shadow-xl"
+			>
+				<Link href={`/links/${slug}`}>
+					<a>
+						<div className="w-56 h-48 overflow-hidden flex justify-center">
+							<img
+								src={image && image.url}
+								alt={name}
+								className="w-full h-full"
+							/>
+						</div>
+						<div>
+							<h3 className="my-4 text-center">{name}</h3>
+						</div>
+						<div className="flex justify-center">
+							<Link href={`/admin/category/${slug}`}>
+								<button className="btn-primary mr-4">
+									Update
+								</button>
+							</Link>
+							<button
+								className="btn-primary"
+								onClick={(e) => confirmDelete(e, slug)}
+							>
+								Delete
+							</button>
+						</div>
+					</a>
+				</Link>
+			</div>
 		));
 
 	return (
-		<>
+		<div className="flex flex-col justify-center items-center py-10 text-gray-600">
 			<div>
-				<h1 className="mb-4">List of categories</h1>
+				<h1 className="mb-4 text-3xl font-semibold">
+					List of categories
+				</h1>
 			</div>
-			<div>{listCategories()}</div>
-		</>
+			<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">{listCategories()}</div>
+		</div>
 	);
 };
 
