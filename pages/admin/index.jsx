@@ -6,25 +6,31 @@ const Admin = ({ user }) => (
 		<h1 className="text-white font-semibold text-2xl sm:text-3xl pb-10 sm:my-10">
 			Admin Dashboard
 		</h1>
-		<div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-16 sm:text-xl">
-			<div className="bg-white bg-opacity-50 px-10 py-5 rounded shadow-md text-red-500 cursor-pointer transition ease-linear duration-300 transform hover:-translate-y-1">
-				<a href="/admin/category/create">Create category</a>
-			</div>
-			<div className="bg-white bg-opacity-50 px-10 py-5 rounded shadow-md text-red-500 cursor-pointer transition ease-linear duration-300 transform hover:-translate-y-1">
-				<Link href="/admin/category/read">
-					<a>All categories</a>
-				</Link>
-			</div>
-			<div className="bg-white bg-opacity-50 px-10 py-5 rounded shadow-md text-red-500 cursor-pointer transition ease-linear duration-300 transform hover:-translate-y-1">
-				<Link href="/admin/link/read">
-					<a>All links</a>
-				</Link>
-			</div>
-			<div className="bg-white bg-opacity-50 px-10 py-5 rounded shadow-md text-red-500 cursor-pointer transition ease-linear duration-300 transform hover:-translate-y-1">
-				<Link href="/user/profile/update">
-					<a>Profile update</a>
-				</Link>
-			</div>
+		<div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-16 sm:text-xl text-gray-700">
+			<a
+				href="/admin/category/create"
+				className="bg-white bg-opacity-50 px-10 py-5 rounded shadow-md cursor-pointer transition ease-linear duration-300 transform hover:-translate-y-1 hover:text-red-600"
+			>
+				Create category
+			</a>
+
+			<Link href="/admin/category/read">
+				<a className="bg-white bg-opacity-50 px-10 py-5 rounded shadow-md cursor-pointer transition ease-linear duration-300 transform hover:-translate-y-1 hover:text-red-600">
+					All categories
+				</a>
+			</Link>
+
+			<Link href="/admin/link/read">
+				<a className="bg-white bg-opacity-50 px-10 py-5 rounded shadow-md cursor-pointer transition ease-linear duration-300 transform hover:-translate-y-1 hover:text-red-600">
+					All links
+				</a>
+			</Link>
+
+			<Link href="/user/profile/update">
+				<a className="bg-white bg-opacity-50 px-10 py-5 rounded shadow-md cursor-pointer transition ease-linear duration-300 transform hover:-translate-y-1 hover:text-red-600">
+					Profile update
+				</a>
+			</Link>
 		</div>
 	</div>
 );

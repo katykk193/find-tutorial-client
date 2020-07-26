@@ -130,7 +130,7 @@ const User = ({ user, userLinks, token }) => {
 				<h1 className="my-4 text-center font-semibold text-3xl my-10 text-red-500">
 					Your links
 				</h1>
-				{listOfLinks()}
+				<div className="mx-5">{listOfLinks()}</div>
 			</div>
 		</div>
 	);
