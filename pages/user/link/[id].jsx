@@ -113,6 +113,7 @@ const Update = ({ oldLink, token }) => {
 			loadedCategories.map(({ _id, name }) => (
 				<div key={_id}>
 					<input
+						className="mr-2"
 						type="checkbox"
 						checked={categories.includes(_id)}
 						onChange={handleToggle(_id)}
@@ -133,6 +134,7 @@ const Update = ({ oldLink, token }) => {
 						checked={type === 'free'}
 						value="free"
 						name="type"
+						className="mr-2"
 					/>
 					Free
 				</label>
@@ -145,6 +147,7 @@ const Update = ({ oldLink, token }) => {
 						checked={type === 'paid'}
 						value="paid"
 						name="type"
+						className="mr-2"
 					/>
 					Paid
 				</label>
@@ -162,6 +165,7 @@ const Update = ({ oldLink, token }) => {
 						checked={medium === 'video'}
 						value="video"
 						name="medium"
+						className="mr-2"
 					/>
 					Video
 				</label>
@@ -174,6 +178,7 @@ const Update = ({ oldLink, token }) => {
 						checked={medium === 'book'}
 						value="book"
 						name="medium"
+						className="mr-2"
 					/>
 					Book
 				</label>
@@ -182,48 +187,57 @@ const Update = ({ oldLink, token }) => {
 	);
 
 	const submitLinkForm = () => (
-		<form className="w-full px-16" onSubmit={handleSubmit}>
-			<h1 className="mt-4 mb-5 sm:mb-5 text-2xl md:text-5xl text-purple-400 font-bold">
+		<form
+			className="bg-white p-6 sm:p-10 my-6 sm:my-24 mx-5 shadow-xl w-full md:w-2/3 xl:w-1/3"
+			onSubmit={handleSubmit}
+		>
+			<h1 className="mb-4 text-xl sm:text-2xl text-red-400 font-semibold">
 				Update Link/URL
 			</h1>
 			{success && showSuccessMessage(success)}
 			{error && showErrorMessage(error)}
-			<div>
-				<label>Category</label>
-				<ul className="h-24 ml-5 overflow-scroll">
-					{showCategories()}
-				</ul>
+			<div className="text-gray-600">
+				<div>
+					<label className="font-semibold">Category</label>
+					<ul className="h-24 ml-5 overflow-scroll flex flex-col flex-wrap">
+						{showCategories()}
+					</ul>
+				</div>
+				<div className="flex">
+					<div className="w-1/2">
+						<label className="font-semibold">Type</label>
+						{showTypes()}
+					</div>
+					<div>
+						<label className="font-semibold">Medium</label>
+						{showMedium()}
+					</div>
+				</div>
+
+				<div className="w-full mt-4">
+					<label className="font-semibold">Title</label>
+					<input
+						value={title}
+						onChange={handleTitleChange}
+						type="text"
+						className="shadow-xl appearance-none border rounded w-full py-2 px-3 text-gray-700"
+					/>
+				</div>
+				<div className="w-full mt-4">
+					<label className="font-semibold">URL</label>
+					<input
+						value={url}
+						onChange={handleURLChange}
+						type="url"
+						className="shadow-xl appearance-none border rounded w-full py-2 px-3 text-gray-700"
+					/>
+				</div>
 			</div>
-			<div>
-				<label>Type</label>
-				{showTypes()}
-			</div>
-			<div>
-				<label>Medium</label>
-				{showMedium()}
-			</div>
-			<div className="w-full mt-4">
-				<label className="text-gray-600">Title</label>
-				<input
-					value={title}
-					onChange={handleTitleChange}
-					type="text"
-					className="shadow-xl appearance-none border rounded w-full py-2 px-3 text-gray-700"
-				/>
-			</div>
-			<div className="w-full mt-4">
-				<label className="text-gray-600">URL</label>
-				<input
-					value={url}
-					onChange={handleURLChange}
-					type="url"
-					className="shadow-xl appearance-none border rounded w-full py-2 px-3 text-gray-700"
-				/>
-			</div>
+
 			<div className="w-full mt-8 items-start">
 				<button
 					disabled={!token}
-					className="shadow-xl bg-purple-400 hover:bg-purple-300 text-white font-bold py-2 px-4 rounded"
+					className="shadow-xl btn-primary text-white font-bold py-2 px-4 rounded"
 				>
 					{isAuth() || token ? buttonText : 'Login to update'}
 				</button>
@@ -231,7 +245,7 @@ const Update = ({ oldLink, token }) => {
 		</form>
 	);
 
-	return <>{submitLinkForm()}</>;
+	return <div className="flex justify-center">{submitLinkForm()}</div>;
 };
 
 Update.getInitialProps = async ({ req, query, token }) => {

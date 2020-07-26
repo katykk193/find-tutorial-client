@@ -35,7 +35,7 @@ const Create = ({ token }) => {
 	useEffect(() => {
 		loadCategories();
 		isAuth() ? setAuth(true) : setAuth(false);
-	}, []);
+	}, [success]);
 
 	const loadCategories = async () => {
 		const response = await axios.get(`${API}/categories`);
@@ -190,7 +190,7 @@ const Create = ({ token }) => {
 
 	const submitLinkForm = () => (
 		<form
-			className="bg-white p-6 sm:p-10 my-6 sm:my-24 mx-5 shadow-xl w-full md:w-1/2 lg:w-1/3"
+			className="bg-white p-6 sm:p-10 my-6 sm:my-24 mx-5 shadow-xl w-full md:w-2/3 xl:w-1/3"
 			onSubmit={handleSubmit}
 		>
 			<h2 className="mb-4 text-xl sm:text-2xl text-red-400 font-semibold">
@@ -202,11 +202,11 @@ const Create = ({ token }) => {
 
 			<div className="text-gray-600 relative">
 				{auth ? null : (
-					<div className="absolute inset-0 bg-black bg-opacity-50 rounded"></div>
+					<div className="absolute inset-0 bg-pink-400 bg-opacity-50 rounded"></div>
 				)}
 				<div className="my-4">
 					<label className="font-semibold">Category</label>
-					<ul className="h-24 ml-5 overflow-scroll">
+					<ul className="h-24 ml-5 overflow-scroll flex flex-col flex-wrap">
 						{showCategories()}
 					</ul>
 				</div>

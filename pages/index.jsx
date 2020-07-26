@@ -95,12 +95,12 @@ const Home = ({ categories }) => {
 						<div className="text-sm">
 							{moment(createdAt).fromNow()} by {postedBy.name}
 						</div>
-						<div className="flex sm:justify-end">
-							<div className="flex justify-between sm:w-1/2 items-center text-sm mt-4 sm:mt-0 bg-pink-100 shadow-xl">
+						<div className="flex justify-end">
+							<div className="flex items-center text-sm mt-4 sm:mt-0 bg-pink-100 shadow-xl pr-2">
 								<div className="bg-primary px-2 py-1 mr-1 rounded text-white">
 									{clicks}
 								</div>
-								<div className="pr-1 text-red-400">clicks</div>
+								<div className="text-red-400">clicks</div>
 							</div>
 						</div>
 					</div>
@@ -116,7 +116,7 @@ const Home = ({ categories }) => {
 						Browse Tutorials/Courses
 					</h1>
 				</div>
-				<div className="mx-6 md:mx-16 grid grid-cols-1 sm:grid-cols-3 gap-6 mb-16 text-gray-600">
+				<div className="mx-6 md:mx-16 grid grid-cols-1 sm:grid-cols-3 gap-6 mb-16 text-gray-700">
 					{listCategories()}
 				</div>
 			</div>
