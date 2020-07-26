@@ -177,12 +177,12 @@ const Create = ({ token }) => {
 					<input
 						type="radio"
 						onChange={handleMediumClick}
-						checked={medium === 'book'}
-						value="book"
+						checked={medium === 'article'}
+						value="article"
 						name="medium"
 						className="mr-2"
 					/>
-					Book
+					Article
 				</label>
 			</div>
 		</div>
