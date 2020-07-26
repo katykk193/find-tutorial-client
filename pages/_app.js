@@ -19,7 +19,7 @@ export default function App({ Component, pageProps }) {
 			<Head>
 				<link rel="stylesheet" type="text/css" href="/styles.css" />
 				<link
-					href="http://fonts.googleapis.com/css?family=Montserrat:400,700"
+					href="//fonts.googleapis.com/css?family=Montserrat:400,700"
 					rel="stylesheet"
 					type="text/css"
 				/>
