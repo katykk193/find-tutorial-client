@@ -3,7 +3,7 @@ module.exports = {
 		APP_NAME: 'NODE-REACT-AWS',
 		API: 'https://hacker-193-api.herokuapp.com/api',
 		PRODUCTION: true,
-		DOMAIN: 'https://hacker-193.herokuapp.com',
+		DOMAIN: 'https://find-tutorial-client.vercel.app',
 		FB_APP_ID: 'IFDJFEIFNVIE'
 	}
 };
