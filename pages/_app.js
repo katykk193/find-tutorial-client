@@ -17,6 +17,7 @@ export default function App({ Component, pageProps }) {
 	return (
 		<>
 			<Head>
+				<title>Hacker</title>
 				<link rel="stylesheet" type="text/css" href="/styles.css" />
 				<link
 					href="//fonts.googleapis.com/css?family=Montserrat:400,700"
