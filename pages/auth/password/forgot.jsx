@@ -40,31 +40,35 @@ const ForgotPassword = () => {
 	};
 
 	const passwordForgotForm = () => (
-		<form onSubmit={handleSubmit} className="w-full max-w-sm">
-			<h1 className="mt-4 mb-5 sm:mb-20 text-2xl md:text-5xl text-purple-400 font-bold">
+		<form
+			onSubmit={handleSubmit}
+			className="bg-white p-10 my-10 sm:my-24 mx-5 shadow-xl w-full md:w-1/2 lg:w-1/3"
+		>
+			<h1 className="mb-8 text-2xl text-red-400 font-semibold">
 				Forgot Password
 			</h1>
 			{success && showSuccessMessage(success)}
 			{error && showErrorMessage(error)}
-			<div className="w-full mt-4">
+			<div className="w-full mt-4 text-gray-600">
+				<label className="font-semibold">Email</label>
 				<input
 					value={email}
 					onChange={handleChange}
 					type="email"
-					className="shadow-xl appearance-none border rounded w-full py-2 px-3 text-gray-700"
+					className="shadow border appearance-none border rounded w-full py-2 px-3 focus:shadow-xl"
 					placeholder="Type your email"
 					required
 				/>
 			</div>
-			<div className="w-full mt-8 items-start">
-				<button className="shadow-xl bg-purple-400 hover:bg-purple-300 text-white font-bold py-2 px-4 rounded">
+			<div className="mt-8">
+				<button className="shadow-xl btn-primary text-white font-bold py-2 px-4 rounded">
 					{buttonText}
 				</button>
 			</div>
 		</form>
 	);
 
-	return <>{passwordForgotForm()}</>;
+	return <div className="flex justify-center">{passwordForgotForm()}</div>;
 };
 
 export default ForgotPassword;

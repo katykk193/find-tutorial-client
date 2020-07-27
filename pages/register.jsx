@@ -99,7 +99,9 @@ const Register = () => {
 				email: '',
 				password: '',
 				buttonText: 'Submitted',
-				success: response.data.message
+				success: response.data.message,
+				loadedCategories: [],
+				categories: [],
 			});
 		} catch (err) {
 			setState({
