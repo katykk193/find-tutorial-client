@@ -110,7 +110,7 @@ const Home = ({ categories }) => {
 
 	return (
 		<>
-			<div className="bg-primary px-0 md:px-16 pt-5 sm:pt-24 pb-2">
+			<div className="bg-primary px-0 md:px-16 pt-8 sm:pt-12 pb-2">
 				<div>
 					<h1 className="text-center font-semibold text-2xl text-white mb-8">
 						Browse Tutorials/Courses
